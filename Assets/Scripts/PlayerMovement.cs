@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]  
-    [SerializeField] private float walkSpeed = 5f;
-    [SerializeField] private float runSpeed = 10f;
+    [SerializeField] private float walkSpeed = 10f;
+    [SerializeField] private float runSpeed = 20f;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 5f;
@@ -14,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float glideFallSpeed = 1f;
 
     [Header("Interaction Settings")]
-    [SerializeField] private float rayDistance = 20f;
+    [SerializeField] private float rayDistance = 5f;
+    [SerializeField] private float heightCorrection = 0.5f;
     [SerializeField] private float throwForce = 15f;
     [SerializeField] private Vector3 holdPositionOffset = new Vector3 (0, 1, 2);
     private GameObject holdPosition;
@@ -51,17 +52,33 @@ public class PlayerMovement : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(moveX, 0, moveZ);
+        Vector3 movement = new Vector3(moveX, 0, moveZ).normalized;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
             //corre se apertar shift
             PlayerRb.MovePosition(transform.position + movement * runSpeed * Time.deltaTime);
+
+            //roda
+            if (movement.magnitude > 0)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(movement);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, runSpeed * Time.deltaTime);
+            }
+            
         }
         else 
         {
             //se não apertar shift anda
             PlayerRb.MovePosition(transform.position + movement * walkSpeed * Time.deltaTime);
+
+
+            //roda
+            if (movement.magnitude > 0)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(movement);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, walkSpeed * Time.deltaTime);
+            }
         }
     }
 
@@ -93,14 +110,13 @@ public class PlayerMovement : MonoBehaviour
         {
             //se não, a gente vai procurar um objeto pra segurar
             RaycastHit hit;
-            
-            //debug
             Vector3 rayDirection = transform.forward;
+            Vector3 rayOrigin = transform.position + Vector3.up * heightCorrection;
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, rayDistance))
+            if (Physics.Raycast(rayOrigin, transform.forward, out hit, rayDistance))
             {
                 //mostra o raycast para debug
-                Debug.DrawRay(transform.position, rayDirection * rayDistance, Color.red, 1f);
+                Debug.DrawRay(rayOrigin, rayDirection * rayDistance, Color.red, 2f);
 
                 if (hit.collider.CompareTag("Liftable"))
                 {
