@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float glideFallSpeed = 1f;
 
     [Header("Interaction Settings")]
-    [SerializeField] private float rayDistance = 4f;
+    [SerializeField] private float rayDistance = 20f;
     [SerializeField] private float throwForce = 15f;
     [SerializeField] private Vector3 holdPositionOffset = new Vector3 (0, 1, 2);
     private GameObject holdPosition;
@@ -93,8 +93,15 @@ public class PlayerMovement : MonoBehaviour
         {
             //se não, a gente vai procurar um objeto pra segurar
             RaycastHit hit;
+            
+            //debug
+            Vector3 rayDirection = transform.forward;
+
             if (Physics.Raycast(transform.position, transform.forward, out hit, rayDistance))
             {
+                //mostra o raycast para debug
+                Debug.DrawRay(transform.position, rayDirection * rayDistance, Color.red, 1f);
+
                 if (hit.collider.CompareTag("Liftable"))
                 {
                     //uma vez que o objeto foi encontrado, a gente chama o método que vai levantar ele
@@ -106,15 +113,44 @@ public class PlayerMovement : MonoBehaviour
 
     private void LiftObject(GameObject obj)
     {
+        //associa, avisa que ta segurando e pega o rigidbody do objeto segurado
         liftedObject = obj;
         isHolding = true;
 
         Rigidbody objRb = liftedObject.GetComponent<Rigidbody>();
 
+        //altera ele pra evitar problemas
         if (objRb != null)
         {
             objRb.useGravity = false;
             objRb.isKinematic = true;
+        }
+
+        //coloca o objeto na posição de levantado e garante que se moverá com o player
+        liftedObject.transform.position = holdPosition.transform.position;
+        liftedObject.transform.SetParent(holdPosition.transform);
+    }
+
+    private void ThrowObject ()
+    {
+        if (liftedObject != null)
+        {
+            //desassocia o objeto levantado do objeto pai e pega seu rigidbody
+            liftedObject.transform.SetParent(null);
+
+            Rigidbody objRb = liftedObject.GetComponent<Rigidbody>();
+
+            if (objRb != null)
+            {
+                //desfaz as mudanças e dispara o objeto para a frente
+                objRb.useGravity = true;
+                objRb.isKinematic = false;
+                objRb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
+            }
+
+            //garante que a variável possa ser reutilizada
+            liftedObject = null;
+            isHolding = false;
         }
     }
 
