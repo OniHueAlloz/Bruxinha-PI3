@@ -88,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //pula se estiver no chão
             PlayerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isGrounded = false;
         }
         else if (!isGrounded && Input.GetButton("Jump"))
         {
@@ -170,19 +171,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter (Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        //checa se tocou o chão
-        if (collision.gameObject.tag == "Ground")
+        // verifica que o jogador tocou o chão
+        if (collision.gameObject.tag == "Ground"||collision.gameObject.tag == "Liftable")
         {
             isGrounded = true; 
         }
     }
 
-    private void OnCollisionExit (Collision collision)
+    private void OnCollisionExit(Collision collision)
     {
-        //checa se saiu do chão
-        if (collision.gameObject.tag == "Ground")
+        // verifica que o jogador saiu do chão
+        if (collision.gameObject.tag == "Ground"||collision.gameObject.tag == "Liftable")
         {
             isGrounded = false; 
         }
