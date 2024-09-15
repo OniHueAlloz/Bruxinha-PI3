@@ -687,9 +687,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12900afa0843e2b48a8eaa0c16343760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 10
-  jumpForce: 5
+  walkSpeed: 10
+  runSpeed: 20
+  jumpForce: 7
   isGrounded: 0
   glideFallSpeed: 1
   rayDistance: 3.5

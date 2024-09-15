@@ -182,10 +182,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        // verifica que o jogador saiu do chão
-        /*if (collision.gameObject.tag == "Ground"||collision.gameObject.tag == "Liftable")
-        {
-            isGrounded = false; 
-        } */
+        //Deixei pq posso usar depois
     }
 }
