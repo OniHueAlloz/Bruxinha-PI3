@@ -693,6 +693,7 @@ MonoBehaviour:
   isGrounded: 0
   glideFallSpeed: 1
   rayDistance: 3.5
+  heightCorrection: 0.5
   throwForce: 15
   holdPositionOffset: {x: 0, y: 1, z: 2}
   PlayerRb: {fileID: 0}
@@ -732,7 +733,7 @@ GameObject:
   - component: {fileID: 1988741116}
   m_Layer: 0
   m_Name: StaticCube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
