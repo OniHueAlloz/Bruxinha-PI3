@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         //Chamando os métodos de comandos
         MovementCommands();
         JumpCommands();
-        if (Input.GetKeyDown(KeyCode.E)) DetectLiftableObject();
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q)) DetectLiftableObject();
     }
 
     private void MovementCommands()
@@ -104,8 +104,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isHolding)
         {
-            //se um objeto estiver sendo segurado, ele será arremessado
-            ThrowObject();
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                DropObject();
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
+            {
+                ThrowObject();
+            }
+            
         }
         else
         {
@@ -148,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
         liftedObject.transform.SetParent(holdPosition.transform);
     }
 
-    private void ThrowObject ()
+    private void ThrowObject()
     {
         if (liftedObject != null)
         {
@@ -166,6 +173,24 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //garante que a variável possa ser reutilizada
+            liftedObject = null;
+            isHolding = false;
+        }
+    }
+
+    private void DropObject()
+    {
+        if (liftedObject != null)
+        {
+            liftedObject.transform.SetParent(null);
+
+            Rigidbody objRb = liftedObject.GetComponent<Rigidbody>();
+            if (objRb != null)
+            {
+                objRb.useGravity = true;
+                objRb.isKinematic = false;
+            }
+
             liftedObject = null;
             isHolding = false;
         }
