@@ -21,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
     private GameObject holdPosition;
     private GameObject liftedObject;
     private bool isHolding = false;
+    private bool isThrowable = false;
+    private bool isLiftable = false;
+    private int coinCount = 0;
+    private bool gotPlush = false;
+    private bool gotObjective = false;
 
     [Header("Player Generals")]
     public Rigidbody PlayerRb;
@@ -43,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         //Chamando os métodos de comandos
         MovementCommands();
         JumpCommands();
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Q)) DetectLiftableObject();
+        if (Input.GetKeyDown(KeyCode.E)) DetectLiftableObject();
     }
 
     private void MovementCommands()
@@ -104,12 +109,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isHolding)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (isLiftable)
             {
+                isLiftable = false;
                 DropObject();
             }
-            else if (Input.GetKeyDown(KeyCode.E))
+            else if (isThrowable)
             {
+                isThrowable = false;
                 ThrowObject();
             }
             
@@ -129,6 +136,13 @@ public class PlayerMovement : MonoBehaviour
                 if (hit.collider.CompareTag("Liftable"))
                 {
                     //uma vez que o objeto foi encontrado, a gente chama o método que vai levantar ele
+                    isLiftable = true;
+                    LiftObject(hit.collider.gameObject);
+                }
+                else if (hit.collider.CompareTag("Throwable"))
+                {
+                    //uma vez que o objeto foi encontrado, a gente chama o método que vai levantar ele
+                    isThrowable = true;
                     LiftObject(hit.collider.gameObject);
                 }
             }
@@ -182,15 +196,19 @@ public class PlayerMovement : MonoBehaviour
     {
         if (liftedObject != null)
         {
+            //objeto levantado deixa de ser filho
             liftedObject.transform.SetParent(null);
+        
 
             Rigidbody objRb = liftedObject.GetComponent<Rigidbody>();
             if (objRb != null)
             {
+                //reativa a física do objeto
                 objRb.useGravity = true;
                 objRb.isKinematic = false;
             }
 
+            //reseta os bools
             liftedObject = null;
             isHolding = false;
         }
@@ -199,7 +217,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // verifica que o jogador tocou o chão
-        if (collision.gameObject.tag == "Ground"||collision.gameObject.tag == "Liftable")
+        if (collision.gameObject.tag == "Ground"||collision.gameObject.tag == "Liftable" || collision.gameObject.tag == "Throwable")
         {
             isGrounded = true; 
         }
@@ -208,5 +226,24 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         //Deixei pq posso usar depois
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Coin")
+        {
+            coinCount++;
+            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.tag == "Plush")
+        {
+            gotPlush = true;
+            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.tag == "Objective")
+        {
+            gotObjective = true;
+            other.gameObject.SetActive(false);
+        }
     }
 }

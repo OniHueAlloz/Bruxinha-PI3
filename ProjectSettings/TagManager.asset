@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Ground
   - Liftable
+  - Throwable
+  - Coin
+  - Plush
+  - Objective
+  - Enemy
   layers:
   - Default
   - TransparentFX
