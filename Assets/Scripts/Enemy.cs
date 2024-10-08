@@ -15,6 +15,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float detectionRadius = 5f;
     private bool isAggressive = false;
     private Transform player;
+    private float timeSincePlayer = 0f;
+    [SerializeField] private float loseAggroTime = 2f;
+
+    [Header("Combat Settings")]
+    [SerializeField] private int energy = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -23,21 +28,44 @@ public class Enemy : MonoBehaviour
         yPosition = transform.position.y;
 
         currentTarget = pointA.position;
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.detectCollisions = true;
+        }
+        Collider collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        isAggressive = DetectPlayer();
-
-        if (isAggressive)
+        //verifica se encontra o player
+        if (DetectPlayer())
         {
+            isAggressive = true;
+            //zera a contagem de tempo longe do player
+            timeSincePlayer = 0f;
+            //faz seguir o player
             PursuePlayer();
         }
-    }
+        else
+        {
+            //atualiza o tempo
+            timeSincePlayer += Time.deltaTime;
 
-    void LateUpdate()
-    {
+            //compara o tempo com o limite
+            if (timeSincePlayer >= loseAggroTime)
+            {
+                isAggressive = false;
+            }
+        }
+
         if (!isAggressive)
         {
             Patrol();
@@ -99,6 +127,42 @@ public class Enemy : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * patrolSpeed);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Thrown"))
+        {
+            //se um objeto jogado acertar o inimigo, reduz a vida
+            energy--;
+            //se zerar a vida, morre
+            if (energy <= 0)
+            {
+                Die();
+            }
+        }
+    }
+
+    private void Die()
+    {
+        //desativa o rigidbody
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.detectCollisions = false;
+        }
+        //desativa o collider
+        Collider collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+        }
+        //Aqui toca a animação de morte
+        //if(animação terminou)
+        //{
+        gameObject.SetActive(false);
+        //}
     }
 
 }

@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Player Generals")]
+    private Rigidbody PlayerRb;
+    [SerializeField] private int energy = 10;
+    [SerializeField] private int life = 2;
+
     [Header("Movement Settings")]  
     [SerializeField] private float walkSpeed = 10f;
     [SerializeField] private float runSpeed = 20f;
@@ -26,9 +32,6 @@ public class PlayerMovement : MonoBehaviour
     private int coinCount = 0;
     private bool gotPlush = false;
     private bool gotObjective = false;
-
-    [Header("Player Generals")]
-    public Rigidbody PlayerRb;
 
     // Start is called before the first frame update
     void Start()
@@ -183,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
                 //desfaz as mudanças e dispara o objeto para a frente
                 objRb.useGravity = true;
                 objRb.isKinematic = false;
+                liftedObject.tag = "Thrown";
                 objRb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
             }
 
@@ -221,11 +225,24 @@ public class PlayerMovement : MonoBehaviour
         {
             isGrounded = true; 
         }
+        else if (collision.gameObject.tag == "Enemy")
+        {
+            energy--;
+            if (energy <= 0)
+            {
+                life--;
+                if (life < 0)
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+            } 
+        }
     }
 
     private void OnCollisionExit(Collision collision)
     {
         //Deixei pq posso usar depois
+        return;
     }
 
     private void OnTriggerEnter(Collider other)

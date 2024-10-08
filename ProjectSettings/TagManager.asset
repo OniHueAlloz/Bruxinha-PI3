@@ -11,6 +11,7 @@ TagManager:
   - Plush
   - Objective
   - Enemy
+  - Thrown
   layers:
   - Default
   - TransparentFX
