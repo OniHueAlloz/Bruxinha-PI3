@@ -9,110 +9,69 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform pointB;
     [SerializeField] private float patrolSpeed = 5f;
     private Vector3 currentTarget; 
-    private float yPosition;
 
     [Header("Detection Settings")]
-    [SerializeField] private float detectionRadius = 5f;
     private bool isAggressive = false;
     private Transform player;
-    private float timeSincePlayer = 0f;
-    [SerializeField] private float loseAggroTime = 2f;
 
     [Header("Combat Settings")]
-    [SerializeField] private int energy = 1;
+    //[SerializeField] private int energy = 1;
+    [SerializeField] private float stunDuration = 5f;
+    private bool isStunned = false;
+    private float stunTimer = 0f;
+
+    enum State {Patrol, Pursue, Stun}
+    State state;
 
     // Start is called before the first frame update
     void Start()
     {
         //fixa a posição vertical e define o destino como a origem
-        yPosition = transform.position.y;
-
         currentTarget = pointA.position;
-
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = false;
-            rb.detectCollisions = true;
-        }
-        Collider collider = GetComponent<Collider>();
-        if (collider != null)
-        {
-            collider.enabled = true;
-        }
+        state = State.Patrol;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //verifica se encontra o player
-        if (DetectPlayer())
+        switch(state)
         {
-            isAggressive = true;
-            //zera a contagem de tempo longe do player
-            timeSincePlayer = 0f;
-            //faz seguir o player
-            PursuePlayer();
-        }
-        else
-        {
-            //atualiza o tempo
-            timeSincePlayer += Time.deltaTime;
-
-            //compara o tempo com o limite
-            if (timeSincePlayer >= loseAggroTime)
-            {
-                isAggressive = false;
-            }
-        }
-
-        if (!isAggressive)
-        {
-            Patrol();
+            case State.Stun: StartStun(); break;
+            case State.Patrol: Patrol(); break;
+            case State.Pursue: PursuePlayer(); break;
         }
     }
 
     private void Patrol()
     {
         //move o inimigo para o ponto definido
-        Vector3 targetPosition = new Vector3(currentTarget.x, yPosition, currentTarget.z);
-        transform.position = Vector3.MoveTowards(new Vector3(transform.position.x, yPosition, transform.position.z), targetPosition, patrolSpeed * Time.deltaTime);
+        Vector3 targetPosition = new Vector3(currentTarget.x, currentTarget.y, currentTarget.z);
+        transform.position = Vector3.MoveTowards(new Vector3(transform.position.x, transform.position.y, transform.position.z), targetPosition, patrolSpeed * Time.deltaTime);
 
         //checa se o inimigo alcançou o destino
-        if (Vector3.Distance(new Vector3(transform.position.x, yPosition, transform.position.z), targetPosition) < 0.1f)
+        if (Vector3.Distance(new Vector3(transform.position.x, transform.position.y, transform.position.z), targetPosition) < 0.1f)
         {
             //muda o destino de A para B e vice-versa
             currentTarget = currentTarget == pointA.position ? pointB.position : pointA.position;
         }
 
         //roda o inimigo
-        Vector3 direction = new Vector3(currentTarget.x, 0, currentTarget.z) - new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 direction = new Vector3(currentTarget.x, currentTarget.y, currentTarget.z) - new Vector3(transform.position.x, transform.position.y, transform.position.z);
         if (direction != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * patrolSpeed);
         }
-    }
 
-    private bool DetectPlayer()
-    {
-        //cria o raycast e define a origem
-        RaycastHit hit;
-        Vector3 origin = transform.position;
-
-        //procura o player
-        if (Physics.SphereCast(origin, detectionRadius, transform.forward, out hit, 2*detectionRadius))
+        //transições
+        if(isStunned)
         {
-            if (hit.collider.CompareTag("Player"))
-            {
-                //achou o player, pega a localização dele
-                player = hit.transform;
-                return true;
-            }
+            state = State.Stun;
         }
-        //não achou o player
-        player = null;
-        return false;
+        else if(isAggressive)
+        {
+            state = State.Pursue;
+        }
     }
 
     private void PursuePlayer()
@@ -127,23 +86,61 @@ public class Enemy : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * patrolSpeed);
         }
+
+        //transições
+        if(isStunned)
+        {
+            state = State.Stun;
+        }
+    }
+
+    private void StartStun()
+    {
+        //reinicializa o timer
+        if (stunTimer <= 0)
+        {
+            stunTimer = stunDuration;
+        }
+
+        stunTimer -= Time.deltaTime;
+        if (stunTimer <= 0)
+        {   
+            //finaliza o atordoamento
+            isStunned = false;
+
+            //transições
+            state = isAggressive ? State.Pursue : State.Patrol;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Thrown"))
         {
-            //se um objeto jogado acertar o inimigo, reduz a vida
-            energy--;
-            //se zerar a vida, morre
-            if (energy <= 0)
-            {
-                Die();
-            }
+            //quando atingido por um objeto arremessado, fica atordoado
+            isStunned = true;
+            isAggressive = false;
+            state = State.Stun;
         }
     }
 
-    private void Die()
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            isAggressive = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            isAggressive = false;
+        }
+    }
+
+    /* private void Die()
     {
         //desativa o rigidbody
         Rigidbody rb = GetComponent<Rigidbody>();
@@ -163,6 +160,6 @@ public class Enemy : MonoBehaviour
         //{
         gameObject.SetActive(false);
         //}
-    }
+    }*/
 
 }
