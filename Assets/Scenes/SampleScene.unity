@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 1195739444}
   - component: {fileID: 1195739449}
   - component: {fileID: 1195739450}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -872,6 +872,8 @@ MonoBehaviour:
   runSpeed: 30
   jumpForce: 6
   isGrounded: 0
+  groundCheckRadius: 0.5
+  groundCheckDistance: 0.6
   glideFallSpeed: 1
   rayDistance: 3.5
   heightCorrection: 0.5
@@ -1278,7 +1280,7 @@ GameObject:
   - component: {fileID: 2045850532}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Ground
+  m_TagString: Grass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1441,6 +1443,14 @@ PrefabInstance:
     - target: {fileID: 466141416632983527, guid: 08dc9aba95ca7054997ff4c88348df17, type: 3}
       propertyPath: m_Name
       value: StaticCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 466141416632983527, guid: 08dc9aba95ca7054997ff4c88348df17, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 466141416632983527, guid: 08dc9aba95ca7054997ff4c88348df17, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 466141416632983531, guid: 08dc9aba95ca7054997ff4c88348df17, type: 3}
       propertyPath: m_RootOrder

@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
   - Liftable
   - Throwable
   - Coin
@@ -12,6 +11,8 @@ TagManager:
   - Objective
   - Enemy
   - Thrown
+  - Grass
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

@@ -28,7 +28,14 @@ public class TriggerSound : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            audioSource.PlayOneShot(sound);
+            if (sound != null)
+            {
+                audioSource.PlayOneShot(sound);
+            }
+            else
+            {
+                Debug.Log("Sound played"); 
+            }
         }
     }
 }

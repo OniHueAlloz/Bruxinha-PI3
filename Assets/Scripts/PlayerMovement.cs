@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Generals")]
     private Rigidbody PlayerRb;
-    [SerializeField] private int energy = 10;
+    [SerializeField] private int energy = 3;
     [SerializeField] private int life = 2;
 
     [Header("Movement Settings")]  
@@ -16,7 +16,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isGrounded = true;
+    [SerializeField] private float groundCheckRadius = 0.5f;
+    [SerializeField] private float groundCheckDistance = 0.6f;
     [SerializeField] private float glideFallSpeed = 1f;
 
     [Header("Interaction Settings")]
@@ -90,13 +92,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool CheckIfGrounded()
+    {
+        int groundLayer = 1 << LayerMask.NameToLayer("Default");
+        return Physics.SphereCast(transform.position, groundCheckRadius, Vector3.down, out RaycastHit hit, groundCheckDistance, groundLayer);
+    }
+
+    //debug 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckDistance, groundCheckRadius);
+    }
+
     private void JumpCommands()
     {
         if (isGrounded && Input.GetButtonDown("Jump"))
         {
             //pula se estiver no chão
             PlayerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
         }
         else if (!isGrounded && Input.GetButton("Jump"))
         {
@@ -221,11 +235,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // verifica que o jogador tocou o chão
-        if (collision.gameObject.tag == "Ground"||collision.gameObject.tag == "Liftable" || collision.gameObject.tag == "Throwable")
-        {
-            isGrounded = true; 
-        }
-        else if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             energy--;
             if (energy <= 0)
@@ -237,12 +247,13 @@ public class PlayerMovement : MonoBehaviour
                 }
             } 
         }
+
+        isGrounded = CheckIfGrounded();
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        //Deixei pq posso usar depois
-        return;
+        isGrounded = CheckIfGrounded();
     }
 
     private void OnTriggerEnter(Collider other)
