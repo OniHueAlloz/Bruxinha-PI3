@@ -261,17 +261,14 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             coinCount++;
-            other.gameObject.SetActive(false);
         }
         else if (other.gameObject.tag == "Plush")
         {
             gotPlush = true;
-            other.gameObject.SetActive(false);
         }
         else if (other.gameObject.tag == "Objective")
         {
             gotObjective = true;
-            other.gameObject.SetActive(false);
         }
     }
 }

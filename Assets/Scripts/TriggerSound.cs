@@ -16,6 +16,8 @@ public class TriggerSound : MonoBehaviour
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 1.0f;
         audioSource.loop = false;
+        audioSource.minDistance = 495f;
+        audioSource.maxDistance = 500f;
     }
 
     // Update is called once per frame
@@ -28,14 +30,8 @@ public class TriggerSound : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (sound != null)
-            {
-                audioSource.PlayOneShot(sound);
-            }
-            else
-            {
-                Debug.Log("Sound played"); 
-            }
+            audioSource.PlayOneShot(sound);
+            Debug.Log("Sound played"); 
         }
     }
 }
