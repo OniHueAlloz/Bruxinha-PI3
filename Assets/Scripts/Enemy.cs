@@ -23,9 +23,8 @@ public class Enemy : MonoBehaviour
     private float stunTimer = 0f;
 
     [Header("Sound Settings")]
-
     [SerializeField] private AudioClip crySound;
-    [SerializeField] private AudioClip stepSound;
+    public AudioClip stepSound;
     private AudioSource audioSource;
 
     enum State {Patrol, Pursue, Stun}
@@ -159,6 +158,12 @@ public class Enemy : MonoBehaviour
         {
             isAggressive = false;
         }
+    }
+
+    public void PlayStepSound()
+    {
+        audioSource.PlayOneShot(stepSound);
+        Debug.Log("Enemy step played"); 
     }
 
     /* private void Die()

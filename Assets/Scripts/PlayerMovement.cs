@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip damageSound;
     [SerializeField] private AudioClip liftSound;
     [SerializeField] private AudioClip throwSound;
+    public AudioClip floatSound;
     private AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -190,6 +191,9 @@ public class PlayerMovement : MonoBehaviour
         liftedObject = obj;
         isHolding = true;
 
+        audioSource.PlayOneShot(liftSound);
+        Debug.Log("liftSound played");
+
         Rigidbody objRb = liftedObject.GetComponent<Rigidbody>();
 
         //altera ele pra evitar problemas
@@ -220,6 +224,8 @@ public class PlayerMovement : MonoBehaviour
                 objRb.isKinematic = false;
                 liftedObject.tag = "Thrown";
                 objRb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
+                audioSource.PlayOneShot(throwSound);
+                Debug.Log("throwSound played");
             }
 
             //garante que a variável possa ser reutilizada
@@ -232,9 +238,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (liftedObject != null)
         {
+            audioSource.PlayOneShot(liftSound);
+            Debug.Log("liftSound played");
+
             //objeto levantado deixa de ser filho
             liftedObject.transform.SetParent(null);
-        
 
             Rigidbody objRb = liftedObject.GetComponent<Rigidbody>();
             if (objRb != null)
@@ -292,5 +300,11 @@ public class PlayerMovement : MonoBehaviour
         {
             gotObjective = true;
         }
+    }
+
+    public void PlayFloatSound()
+    {
+        audioSource.PlayOneShot(floatSound);
+        Debug.Log("floatSound played"); 
     }
 }
