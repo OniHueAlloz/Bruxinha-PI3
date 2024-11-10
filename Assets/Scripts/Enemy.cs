@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class Enemy : MonoBehaviour
 {
     [Header("Patrol Settings")]
@@ -20,6 +22,11 @@ public class Enemy : MonoBehaviour
     private bool isStunned = false;
     private float stunTimer = 0f;
 
+    [Header("Sound Settings")]
+    [SerializeField] private AudioClip crySound;
+    public AudioClip stepSound;
+    private AudioSource audioSource;
+
     enum State {Patrol, Pursue, Stun}
     State state;
 
@@ -29,6 +36,13 @@ public class Enemy : MonoBehaviour
         //fixa a posição vertical e define o destino como a origem
         currentTarget = pointA.position;
         state = State.Patrol;
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 1.0f;
+        audioSource.loop = false;
+        audioSource.minDistance = 495f;
+        audioSource.maxDistance = 500f;
     }
 
     // Update is called once per frame
@@ -70,6 +84,8 @@ public class Enemy : MonoBehaviour
         }
         else if(isAggressive)
         {
+            audioSource.PlayOneShot(crySound);
+            Debug.Log("Enemy cry played"); 
             state = State.Pursue;
         }
     }
@@ -109,7 +125,7 @@ public class Enemy : MonoBehaviour
             isStunned = false;
 
             //transições
-            state = isAggressive ? State.Pursue : State.Patrol;
+            state = State.Patrol;
         }
     }
 
@@ -120,6 +136,10 @@ public class Enemy : MonoBehaviour
             //quando atingido por um objeto arremessado, fica atordoado
             isStunned = true;
             isAggressive = false;
+
+            audioSource.PlayOneShot(crySound);
+            Debug.Log("Enemy cry played"); 
+
             state = State.Stun;
         }
     }
@@ -138,6 +158,12 @@ public class Enemy : MonoBehaviour
         {
             isAggressive = false;
         }
+    }
+
+    public void PlayStepSound()
+    {
+        audioSource.PlayOneShot(stepSound);
+        Debug.Log("Enemy step played"); 
     }
 
     /* private void Die()
