@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Generals")]
@@ -35,6 +37,13 @@ public class PlayerMovement : MonoBehaviour
     private bool gotPlush = false;
     private bool gotObjective = false;
 
+    [Header("Sound Settings")]
+    [SerializeField] private AudioClip glideSound;
+    [SerializeField] private AudioClip damageSound;
+    [SerializeField] private AudioClip liftSound;
+    [SerializeField] private AudioClip throwSound;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +54,13 @@ public class PlayerMovement : MonoBehaviour
         holdPosition = new GameObject("HoldPosition");
         holdPosition.transform.SetParent(transform);
         holdPosition.transform.localPosition = holdPositionOffset;
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 1.0f;
+        audioSource.loop = false;
+        audioSource.minDistance = 495f;
+        audioSource.maxDistance = 500f;
     }
 
     // Update is called once per frame
@@ -118,6 +134,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 //pula se estiver fora do chão (o if ali em cima garante que a redução de velocidade do glide só afeta a descida e não a subida)
                 PlayerRb.velocity = new Vector3(PlayerRb.velocity.x, -glideFallSpeed, PlayerRb.velocity.z);
+                audioSource.PlayOneShot(glideSound);
+                Debug.Log("glideSound played"); 
             }
         }
     }
@@ -238,6 +256,10 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             energy--;
+
+            audioSource.PlayOneShot(damageSound);
+            Debug.Log("damageSound played"); 
+
             if (energy <= 0)
             {
                 life--;
