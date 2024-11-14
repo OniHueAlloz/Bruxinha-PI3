@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private bool isGrounded = true;
+    [SerializeField] private bool isGrounded = false;
     [SerializeField] private float groundCheckRadius = 0.5f;
     [SerializeField] private float groundCheckDistance = 0.6f;
     [SerializeField] private float glideFallSpeed = 1f;
@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //Chamando os métodos de comandos
+        isGrounded = CheckIfGrounded();
         MovementCommands();
         JumpCommands();
         if (Input.GetKeyDown(KeyCode.E)) DetectLiftableObject();
@@ -128,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //pula se estiver no chão
             PlayerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isGrounded = false;
         }
         else if (!isGrounded && Input.GetButton("Jump"))
         {
@@ -277,14 +279,17 @@ public class PlayerMovement : MonoBehaviour
                 }
             } 
         }
+    }
 
+    /*private void OnCollisionStay(Collision collision)
+    {
         isGrounded = CheckIfGrounded();
     }
 
     private void OnCollisionExit(Collision collision)
     {
         isGrounded = CheckIfGrounded();
-    }
+    } */
 
     private void OnTriggerEnter(Collider other)
     {
