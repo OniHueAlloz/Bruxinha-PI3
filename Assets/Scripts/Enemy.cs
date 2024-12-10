@@ -1,20 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[RequireComponent(typeof(AudioSource))]
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("Patrol Settings")]
-    [SerializeField] private Transform pointA;
-    [SerializeField] private Transform pointB;
-    [SerializeField] private float patrolSpeed = 5f;
-    private Vector3 currentTarget; 
+    enum State {Patrol, Seek}
+    private State currentState = State.Patrol;
 
-    [Header("Detection Settings")]
-    private bool isAggressive = false;
-    private Transform player;
+    [Header("Movement Settings")]
+    private NavMeshAgent enemy;
+    [SerializeField] private Transform pointA = null;
+    [SerializeField] private Transform pointB = null;
+    [SerializeField] private Transform player = null;
+    [SerializeField] private float patrolSpeed = 5f;
+    [SerializeField] private float chaseSpeed = 8f;
+    [SerializeField] private float detectionRange = 10f;
+
+    private Transform currentTarget;
+    private Rigidbody rb;
 
     [Header("Combat Settings")]
     //[SerializeField] private int energy = 1;
@@ -23,20 +27,21 @@ public class Enemy : MonoBehaviour
     private float stunTimer = 0f;
 
     [Header("Sound Settings")]
-    [SerializeField] private AudioClip crySound;
+    public AudioClip crySound;
     public AudioClip stepSound;
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
-    enum State {Patrol, Pursue, Stun}
-    State state;
 
     // Start is called before the first frame update
+    void Awake()
+    {
+        enemy = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
+        currentTarget = pointA;
+    }
+
     void Start()
     {
-        //fixa a posição vertical e define o destino como a origem
-        currentTarget = pointA.position;
-        state = State.Patrol;
-
         audioSource = GetComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 1.0f;
@@ -48,116 +53,100 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(state)
+        if (isStunned)
         {
-            case State.Stun: StartStun(); break;
-            case State.Patrol: Patrol(); break;
-            case State.Pursue: PursuePlayer(); break;
+            StunBehaviour();
+            return;
+        }
+
+        switch(currentState)
+        {
+            case State.Patrol:
+                PatrolBehaviour();
+                break;
+            
+            case State.Seek:
+                SeekBehaviour();
+                break;
+            
+            default:
+                break;
         }
     }
 
-    private void Patrol()
+    void PatrolBehaviour()
     {
-        //move o inimigo para o ponto definido
-        Vector3 targetPosition = new Vector3(currentTarget.x, currentTarget.y, currentTarget.z);
-        transform.position = Vector3.MoveTowards(new Vector3(transform.position.x, transform.position.y, transform.position.z), targetPosition, patrolSpeed * Time.deltaTime);
+        enemy.speed = patrolSpeed;
+        enemy.SetDestination(currentTarget.position);
 
-        //checa se o inimigo alcançou o destino
-        if (Vector3.Distance(new Vector3(transform.position.x, transform.position.y, transform.position.z), targetPosition) < 0.1f)
+        if (Vector3.Distance(transform.position, currentTarget.position) < 1f)
         {
-            //muda o destino de A para B e vice-versa
-            currentTarget = currentTarget == pointA.position ? pointB.position : pointA.position;
+            Transform nextTarget = currentTarget == pointA ? pointB : pointA;
+
+            Vector3 direction = (nextTarget.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+
+            currentTarget = nextTarget;
         }
 
-        //roda o inimigo
-        Vector3 direction = new Vector3(currentTarget.x, currentTarget.y, currentTarget.z) - new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        if (direction != Vector3.zero)
+        if (Vector3.Distance(transform.position, player.position) <= detectionRange)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * patrolSpeed);
-        }
-
-        //transições
-        if(isStunned)
-        {
-            state = State.Stun;
-        }
-        else if(isAggressive)
-        {
-            audioSource.PlayOneShot(crySound);
-            Debug.Log("Enemy cry played"); 
-            state = State.Pursue;
+            PlayCrySound();
+            currentState = State.Seek;
+            currentTarget = player;
         }
     }
 
-    private void PursuePlayer()
+    void SeekBehaviour()
     {
-        //garante que conseguiu pegar a localização do player
-        if (player != null)
-        {
-            //segue o player
-            Vector3 direction = (player.position - transform.position).normalized;
-            transform.position += direction * patrolSpeed * Time.deltaTime;
-            //gira na direção do player
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * patrolSpeed);
-        }
+        enemy.speed = chaseSpeed;
+        enemy.SetDestination(player.position);
 
-        //transições
-        if(isStunned)
+        if (Vector3.Distance(transform.position, player.position) > detectionRange)
         {
-            state = State.Stun;
+            currentState = State.Patrol;
+            currentTarget = pointA;
         }
     }
 
-    private void StartStun()
+    void StunBehaviour()
     {
-        //reinicializa o timer
-        if (stunTimer <= 0)
-        {
-            stunTimer = stunDuration;
-        }
+        stunTimer += Time.deltaTime;
 
-        stunTimer -= Time.deltaTime;
-        if (stunTimer <= 0)
-        {   
-            //finaliza o atordoamento
+        if(stunTimer >= stunDuration)
+        {
             isStunned = false;
-
-            //transições
-            state = State.Patrol;
+            stunTimer = 0f;
+            currentState = State.Patrol;
+            currentTarget = pointA;
+            rb.constraints = (RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY);
+            enemy.isStopped = false;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void GetStunned()
+    {
+        isStunned = true;
+        stunTimer = 0f;
+        enemy.isStopped = true;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        enemy.ResetPath();
+        PlayCrySound();
+    }
+
+    void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Thrown"))
         {
-            //quando atingido por um objeto arremessado, fica atordoado
-            isStunned = true;
-            isAggressive = false;
-
-            audioSource.PlayOneShot(crySound);
-            Debug.Log("Enemy cry played"); 
-
-            state = State.Stun;
+            GetStunned();
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnDrawGizmos()
     {
-        if(other.CompareTag("Player"))
-        {
-            isAggressive = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            isAggressive = false;
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 
     public void PlayStepSound()
@@ -166,26 +155,10 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemy step played"); 
     }
 
-    /* private void Die()
+    public void PlayCrySound()
     {
-        //desativa o rigidbody
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-            rb.detectCollisions = false;
-        }
-        //desativa o collider
-        Collider collider = GetComponent<Collider>();
-        if (collider != null)
-        {
-            collider.enabled = false;
-        }
-        //Aqui toca a animação de morte
-        //if(animação terminou)
-        //{
-        gameObject.SetActive(false);
-        //}
-    }*/
+        audioSource.PlayOneShot(crySound);
+        Debug.Log("Enemy cry played"); 
+    }
 
 }
