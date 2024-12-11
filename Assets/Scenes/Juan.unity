@@ -907,8 +907,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12900afa0843e2b48a8eaa0c16343760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energy: 10
-  life: 2
   walkSpeed: 8
   runSpeed: 16
   jumpForce: 6
@@ -1346,7 +1344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2617947441385306441, guid: 12708dffa4372c34790704046a5b4016, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.5
+      value: 18.43
       objectReference: {fileID: 0}
     - target: {fileID: 2617947441385306441, guid: 12708dffa4372c34790704046a5b4016, type: 3}
       propertyPath: m_LocalPosition.y
