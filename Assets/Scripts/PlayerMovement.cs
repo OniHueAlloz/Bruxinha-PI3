@@ -9,8 +9,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Generals")]
     private Rigidbody PlayerRb;
-    [SerializeField] private int energy = 3;
-    [SerializeField] private int life = 2;
+    //Informações de Interface
+    public static int energy = 3;
+    public static int life = 2;
 
     [Header("Movement Settings")]  
     [SerializeField] private float walkSpeed = 10f;
@@ -33,9 +34,11 @@ public class PlayerMovement : MonoBehaviour
     private bool isHolding = false;
     private bool isThrowable = false;
     private bool isLiftable = false;
-    private int coinCount = 0;
-    private bool gotPlush = false;
-    private bool gotObjective = false;
+
+    //Pedido Concluído:
+    public static int coinCount = 0;
+    public static bool gotPlush = false;
+    public static bool gotObjective = false;
 
     [Header("Sound Settings")]
     [SerializeField] private AudioClip glideSound;
