@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float heightCorrection = 0.5f;
     [SerializeField] private float throwForce = 15f;
     [SerializeField] private Vector3 holdPositionOffset = new Vector3 (0, 1, 2);
+    [SerializeField] private int wingValue = 5;
     private GameObject holdPosition;
     private GameObject liftedObject;
     private bool isHolding = false;
@@ -299,6 +300,10 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Coin")
         {
             coinCount++;
+        }
+        else if (other.gameObject.tag == "Wing")
+        {
+            coinCount += wingValue;
         }
         else if (other.gameObject.tag == "Plush")
         {

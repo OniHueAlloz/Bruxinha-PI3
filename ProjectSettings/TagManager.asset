@@ -13,6 +13,7 @@ TagManager:
   - Thrown
   - Grass
   - Ground
+  - Wing
   layers:
   - Default
   - TransparentFX
