@@ -10,7 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Generals")]
     private Rigidbody PlayerRb;
     //Informações de Interface
-    public static int energy = 3;
+    public static int maxEnergy = 10;
+    public static int energy = 10;
     public static int life = 2;
 
     [Header("Movement Settings")]  
@@ -29,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float heightCorrection = 0.5f;
     [SerializeField] private float throwForce = 15f;
     [SerializeField] private Vector3 holdPositionOffset = new Vector3 (0, 1, 2);
-    [SerializeField] private int wingValue = 5;
     private GameObject holdPosition;
     private GameObject liftedObject;
     private bool isHolding = false;
@@ -303,7 +303,22 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (other.gameObject.tag == "Wing")
         {
-            coinCount += wingValue;
+            life++;
+        }
+        else if (other.gameObject.tag == "Radish")
+        {
+            if (energy == maxEnergy)
+            {
+                coinCount += 10;
+            }
+            else if (energy == (maxEnergy-1))
+            {
+                energy = maxEnergy;
+            }
+            else
+            {
+                energy += 3;
+            }
         }
         else if (other.gameObject.tag == "Plush")
         {

@@ -14,6 +14,7 @@ TagManager:
   - Grass
   - Ground
   - Wing
+  - Radish
   layers:
   - Default
   - TransparentFX
