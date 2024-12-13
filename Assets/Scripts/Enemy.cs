@@ -37,12 +37,12 @@ public class Enemy : MonoBehaviour
     {
         enemy = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         currentTarget = pointA;
     }
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 1.0f;
         audioSource.loop = false;
