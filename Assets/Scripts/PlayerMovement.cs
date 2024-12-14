@@ -8,10 +8,11 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Generals")]
-    private Rigidbody PlayerRb;
+    [SerializeField] public static int maxEnergy = 10;
     //Informações de Interface
-    public static int energy = 3;
-    public static int life = 2;
+    [SerializeField] public static int energy = 10;
+    [SerializeField] public static int life = 3;
+    private Rigidbody PlayerRb;
 
     [Header("Movement Settings")]  
     [SerializeField] private float walkSpeed = 10f;
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isHolding = false;
     private bool isThrowable = false;
     private bool isLiftable = false;
+    private Vector3 initialPosition;
 
     //Pedido Concluído:
     public static int coinCount = 0;
@@ -45,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip damageSound;
     [SerializeField] private AudioClip liftSound;
     [SerializeField] private AudioClip throwSound;
-    public AudioClip floatSound;
+    [SerializeField] private AudioClip floatSound;
     private AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -53,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Associando o Rigidbody
         PlayerRb = GetComponent<Rigidbody>();
+        initialPosition = transform.position;
 
         //Criando um objeto vazio e colocando ele numa posição relativa ao player com offset, para usar como referência depois
         holdPosition = new GameObject("HoldPosition");
@@ -180,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
                     isLiftable = true;
                     LiftObject(hit.collider.gameObject);
                 }
-                else if (hit.collider.CompareTag("Throwable"))
+                else if (hit.collider.CompareTag("Throwable") || hit.collider.CompareTag("Thrown"))
                 {
                     //uma vez que o objeto foi encontrado, a gente chama o método que vai levantar ele
                     isThrowable = true;
@@ -300,6 +303,25 @@ public class PlayerMovement : MonoBehaviour
         {
             coinCount++;
         }
+        else if (other.gameObject.tag == "Wing")
+        {
+            life++;
+        }
+        else if (other.gameObject.tag == "Radish")
+        {
+            if (energy == maxEnergy)
+            {
+                coinCount += 10;
+            }
+            else if (energy == (maxEnergy-1))
+            {
+                energy = maxEnergy;
+            }
+            else
+            {
+                energy += 3;
+            }
+        }
         else if (other.gameObject.tag == "Plush")
         {
             gotPlush = true;
@@ -307,6 +329,19 @@ public class PlayerMovement : MonoBehaviour
         else if (other.gameObject.tag == "Objective")
         {
             gotObjective = true;
+        }
+        else if (other.gameObject.tag == "Death")
+        {
+            life--;
+            if (life < 0)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            else
+            {
+                transform.position = initialPosition;
+                PlayerRb.velocity = Vector3.zero;
+            }
         }
     }
 

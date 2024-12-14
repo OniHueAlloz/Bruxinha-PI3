@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6224207691628414038}
   - component: {fileID: 6224207691628414039}
   - component: {fileID: 6224207691628414032}
-  - component: {fileID: 6224207691628414033}
   - component: {fileID: 6224207691628414034}
   - component: {fileID: 6224207691628414035}
   m_Layer: 0
@@ -35,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6224207691628414038
 MeshFilter:
@@ -108,33 +107,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &6224207691628414033
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6224207691628414044}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &6224207691628414034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf58eddb601eab74cb07d4fce06559e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 0}
+  sound: {fileID: 8300000, guid: 8c56e973b531e9340a96e8f74a306879, type: 3}
 --- !u!82 &6224207691628414035
 AudioSource:
   m_ObjectHideFlags: 0

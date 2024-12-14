@@ -13,6 +13,9 @@ TagManager:
   - Thrown
   - Grass
   - Ground
+  - Wing
+  - Radish
+  - Death
   layers:
   - Default
   - TransparentFX
