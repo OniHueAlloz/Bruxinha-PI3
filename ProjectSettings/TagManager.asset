@@ -15,6 +15,7 @@ TagManager:
   - Ground
   - Wing
   - Radish
+  - Death
   layers:
   - Default
   - TransparentFX
