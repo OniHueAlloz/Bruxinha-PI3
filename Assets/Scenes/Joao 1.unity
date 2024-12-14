@@ -877,7 +877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e0fb36d2a44e49448b98ab377c9c3ed9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.32
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e0fb36d2a44e49448b98ab377c9c3ed9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -885,7 +885,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e0fb36d2a44e49448b98ab377c9c3ed9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.4
+      value: -25.51
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e0fb36d2a44e49448b98ab377c9c3ed9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -933,6 +933,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8072440096831357756, guid: e0fb36d2a44e49448b98ab377c9c3ed9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1147608575}
+    - targetCorrespondingSourceObject: {fileID: 8072440096831357756, guid: e0fb36d2a44e49448b98ab377c9c3ed9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1147608577}
   m_SourcePrefab: {fileID: 100100000, guid: e0fb36d2a44e49448b98ab377c9c3ed9, type: 3}
 --- !u!1 &1056313020
 GameObject:
@@ -1035,6 +1038,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.008077733, y: 0.018201556, z: 0.014046079}
   m_Center: {x: 0.00068786903, y: -0.0013431045, z: 0.0056259735}
+--- !u!95 &1147608577
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147608572}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4637b3e87bc48884d80f5c60d073bbf5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1195739443
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,7 +2235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8710614381808472743, guid: 7117264c68bc2494b9bd5d7a853e8216, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.55
+      value: 7.11
       objectReference: {fileID: 0}
     - target: {fileID: 8710614381808472743, guid: 7117264c68bc2494b9bd5d7a853e8216, type: 3}
       propertyPath: m_LocalPosition.y
