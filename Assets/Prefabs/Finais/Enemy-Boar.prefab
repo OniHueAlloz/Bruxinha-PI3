@@ -101,7 +101,7 @@ Transform:
   - {fileID: 642289750}
   - {fileID: 2098978778}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &4036924230526938836
 MeshFilter:
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointA: {fileID: 642289750}
   pointB: {fileID: 2098978778}
-  player: {fileID: 8523037103206665442, guid: 237020da760d9634ab2fa9e749d5c0e0, type: 3}
+  player: {fileID: 0}
   patrolSpeed: 7
   chaseSpeed: 10
   detectionRange: 20
@@ -234,7 +234,7 @@ AudioSource:
   m_GameObject: {fileID: 351845967777430475}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6237765474726674113, guid: f6e5fc4d7dea8e94c8dead9138d4d45d, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

@@ -9,9 +9,9 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Player Generals")]
-    [SerializeField] public static int maxEnergy = 10;
+    [SerializeField] public static int maxEnergy = 5;
     //Informações de Interface
-    [SerializeField] public static int energy = 10;
+    [SerializeField] public static int energy = 5;
     [SerializeField] public static int life = 3;
     private Rigidbody PlayerRb;
 
@@ -322,7 +322,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                energy += 3;
+                energy += 2;
             }
         }
         else if (other.gameObject.tag == "Plush")

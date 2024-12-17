@@ -14,9 +14,23 @@ public class Huds : MonoBehaviour
     public Text objectiveText = null;
     public Text plushText = null;
 
+    public GameObject Dialogo1;
+    public GameObject Dialogo2;
+    public GameObject Dialogo3;
+
+
+
+    void Awake()
+    {
+        Time.timeScale = 0f;
+        Dialogo1.SetActive(true);
+        Dialogo2.SetActive(false);
+        Dialogo3.SetActive(false);
+    }
+
     void Start()
     {
-
+        
     }
 
     void Update()

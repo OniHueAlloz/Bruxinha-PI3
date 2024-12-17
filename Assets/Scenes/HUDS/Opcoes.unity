@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1313,6 +1313,7 @@ GameObject:
   - component: {fileID: 1504723902}
   - component: {fileID: 1504723901}
   - component: {fileID: 1504723905}
+  - component: {fileID: 1504723906}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1419,6 +1420,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ecdab087d7bcb48886cbbd8af01be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pedido: {fileID: 0}
+  coinText: {fileID: 0}
+  objectiveText: {fileID: 0}
+  plushText: {fileID: 0}
+--- !u!114 &1504723906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504723900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b3c70dcf22de49498f3ff10bb7dbab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicMixer: {fileID: 24100000, guid: f6e5fc4d7dea8e94c8dead9138d4d45d, type: 2}
+  volumeBotao: {fileID: 1935772062}
+  volumeEfeito: {fileID: 1924649769}
 --- !u!1 &1614661081
 GameObject:
   m_ObjectHideFlags: 0
@@ -1786,13 +1806,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1632468495}
   m_HandleRect: {fileID: 395831873}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1504723906}
+        m_TargetAssemblyTypeName: VolumeSlider, Assembly-CSharp
+        m_MethodName: MudarEfeitos
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1935772060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,10 +1909,22 @@ MonoBehaviour:
   m_FillRect: {fileID: 1179835844}
   m_HandleRect: {fileID: 1067497825}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.0001
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1504723906}
+        m_TargetAssemblyTypeName: VolumeSlider, Assembly-CSharp
+        m_MethodName: MudarVolume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
