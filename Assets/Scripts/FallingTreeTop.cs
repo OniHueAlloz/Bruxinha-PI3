@@ -6,13 +6,18 @@ public class FallingTreeTop : MonoBehaviour
 {
     [SerializeField] private Transform ground;
     private AudioSource audioSource;
-    private Rigidbody rb;
+    public AudioClip fallSound;
+    public Rigidbody rb;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+    }
+
+    void Start()
+    {
         audioSource.playOnAwake = false;
         audioSource.spatialBlend = 1.0f;
         audioSource.loop = false;
@@ -21,16 +26,17 @@ public class FallingTreeTop : MonoBehaviour
     }
 
     // Update is called once per frame
-     void Update()
+    /*void Update()
     {
         
-    }
+    }*/
 
-    /*private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(rb == null)
+        if(collision.transform == ground)
         {
-            break;
+            audioSource.PlayOneShot(fallSound);
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
-    } */
+    }
 }
