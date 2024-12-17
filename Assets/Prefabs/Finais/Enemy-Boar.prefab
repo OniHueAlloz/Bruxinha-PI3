@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &642289749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 642289750}
+  m_Layer: 0
+  m_Name: PointA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &642289750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642289749}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.0035000087, y: -0.0021250003, z: -0.09}
+  m_LocalScale: {x: 0.0125, y: 0.0125, z: 0.0125}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1128664799550808433}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2098978777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2098978778}
+  m_Layer: 0
+  m_Name: PointB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2098978778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098978777}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.003125, y: -0.00062500016, z: 0.095374994}
+  m_LocalScale: {x: 0.0125, y: 0.0125, z: 0.0125}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1128664799550808433}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &351845967777430475
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,6 +78,7 @@ GameObject:
   - component: {fileID: 4036924230526938409}
   - component: {fileID: 4036924230526938838}
   - component: {fileID: 4036924230526938839}
+  - component: {fileID: 126369852}
   m_Layer: 0
   m_Name: Enemy-Boar
   m_TagString: Untagged
@@ -34,7 +97,9 @@ Transform:
   m_LocalPosition: {x: -0.24, y: -0.65, z: -13.06}
   m_LocalScale: {x: 80, y: 80, z: 80}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 642289750}
+  - {fileID: 2098978778}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
@@ -122,16 +187,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3aadef75a021a48bca5b34b20528e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointA: {fileID: 0}
-  pointB: {fileID: 0}
-  player: {fileID: 0}
+  pointA: {fileID: 642289750}
+  pointB: {fileID: 2098978778}
+  player: {fileID: 8523037103206665442, guid: 237020da760d9634ab2fa9e749d5c0e0, type: 3}
   patrolSpeed: 5
   chaseSpeed: 8
   detectionRange: 7
   stunDuration: 5
-  crySound: {fileID: 0}
-  stepSound: {fileID: 0}
+  crySound: {fileID: 8300000, guid: 92023c2486cf99245b77763789175d3c, type: 3}
+  stepSound: {fileID: 8300000, guid: 2ca7108fd397c254881341584f4b059c, type: 3}
   audioSource: {fileID: 4036924230526938838}
+  animator: {fileID: 0}
 --- !u!54 &4036924230526938409
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -276,3 +342,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0098428605, y: 0.016876763, z: 0.021255631}
   m_Center: {x: 0.00005469136, y: -0.00060220883, z: -0.00011833608}
+--- !u!95 &126369852
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351845967777430475}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4637b3e87bc48884d80f5c60d073bbf5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

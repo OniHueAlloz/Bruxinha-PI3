@@ -220,4 +220,4 @@ MonoBehaviour:
   rotationSpeed: 150
   floatDistance: 0.3
   floatSpeed: 2
-  sound: {fileID: 0}
+  sound: {fileID: 8300000, guid: 28aa3789389ed5341949cdf6d48ac671, type: 3}

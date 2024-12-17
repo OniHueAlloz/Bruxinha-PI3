@@ -31,6 +31,9 @@ public class Enemy : MonoBehaviour
     public AudioClip stepSound;
     public AudioSource audioSource;
 
+    [Header("Aniamtion Settings")]
+    public Animator animator;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -38,6 +41,7 @@ public class Enemy : MonoBehaviour
         enemy = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
         currentTarget = pointA;
     }
 
@@ -79,6 +83,8 @@ public class Enemy : MonoBehaviour
         enemy.speed = patrolSpeed;
         enemy.SetDestination(currentTarget.position);
 
+        animator.SetInteger("idAnimation", 1);
+
         if (Vector3.Distance(transform.position, currentTarget.position) < 1f)
         {
             Transform nextTarget = currentTarget == pointA ? pointB : pointA;
@@ -103,6 +109,8 @@ public class Enemy : MonoBehaviour
         enemy.speed = chaseSpeed;
         enemy.SetDestination(player.position);
 
+        animator.SetInteger("idAnimation", 2);
+
         if (Vector3.Distance(transform.position, player.position) > detectionRange)
         {
             currentState = State.Patrol;
@@ -122,6 +130,8 @@ public class Enemy : MonoBehaviour
             currentTarget = pointA;
             rb.constraints = (RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY);
             enemy.isStopped = false;
+
+            animator.SetBool("StunTrigger", false);
         }
     }
 
@@ -132,6 +142,8 @@ public class Enemy : MonoBehaviour
         enemy.isStopped = true;
         rb.constraints = RigidbodyConstraints.FreezeAll;
         enemy.ResetPath();
+
+        animator.SetBool("StunTrigger", true);
         PlayCrySound();
     }
 
