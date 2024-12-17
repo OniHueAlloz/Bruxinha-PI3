@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip damageSound;
     [SerializeField] private AudioClip liftSound;
     [SerializeField] private AudioClip throwSound;
+    [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip floatSound;
     private AudioSource audioSource;
 
@@ -136,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
             //pula se estiver no chão
             PlayerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;
+            audioSource.PlayOneShot(jumpSound);
         }
         else if (!isGrounded && Input.GetButton("Jump"))
         {
