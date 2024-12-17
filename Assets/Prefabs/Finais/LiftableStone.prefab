@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1966059159909430967
+--- !u!1 &1305780691527486067
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1153775615552105485}
-  - component: {fileID: 2858892248944386984}
-  - component: {fileID: 20305865020168034}
-  - component: {fileID: 2858892248944386986}
-  - component: {fileID: 2858892248944386987}
+  - component: {fileID: 8300208116644282937}
+  - component: {fileID: 2888198291467758248}
+  - component: {fileID: 4794211198563402637}
   m_Layer: 0
-  m_Name: LiftableStone
-  m_TagString: Liftable
+  m_Name: Pedra grande (1)
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1153775615552105485
+--- !u!4 &8300208116644282937
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966059159909430967}
-  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
-  m_LocalPosition: {x: 12.55, y: 0.58, z: -0.85}
-  m_LocalScale: {x: 1500, y: 1500, z: 1500}
+  m_GameObject: {fileID: 1305780691527486067}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
---- !u!33 &2858892248944386984
+  m_Father: {fileID: 8710614381808472743}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2888198291467758248
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966059159909430967}
-  m_Mesh: {fileID: -915661510970944972, guid: 415a9888250a5004faf5eeab993cee77, type: 3}
---- !u!23 &20305865020168034
+  m_GameObject: {fileID: 1305780691527486067}
+  m_Mesh: {fileID: 7937508548600838885, guid: 271be224efc670e43a856b66c3b9cbd5, type: 3}
+--- !u!23 &4794211198563402637
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966059159909430967}
+  m_GameObject: {fileID: 1305780691527486067}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e8713e94454a70c49baf15930424143d, type: 2}
+  - {fileID: 2100000, guid: 1ff3bd60b452ebd418b2673bf885324a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,13 +83,47 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2858892248944386986
+--- !u!1 &8334334481375299613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8710614381808472743}
+  - component: {fileID: 178264340631851797}
+  - component: {fileID: 8281020359247751978}
+  m_Layer: 0
+  m_Name: LiftableStone
+  m_TagString: Liftable
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8710614381808472743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8334334481375299613}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
+  m_LocalPosition: {x: 10.55, y: 0.45, z: -30.65}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8300208116644282937}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
+--- !u!65 &178264340631851797
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966059159909430967}
+  m_GameObject: {fileID: 8334334481375299613}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -104,15 +136,15 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.00074957707, y: 0.00082831975, z: 0.00075591763}
-  m_Center: {x: -0.000010042437, y: 0.000017357172, z: 0.000009082969}
---- !u!54 &2858892248944386987
+  m_Size: {x: 0.019389188, y: 0.019030778, z: 0.020164141}
+  m_Center: {x: 0.00009561844, y: 0.00003345357, z: 0.000051056028}
+--- !u!54 &8281020359247751978
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1966059159909430967}
+  m_GameObject: {fileID: 8334334481375299613}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
