@@ -190,9 +190,9 @@ MonoBehaviour:
   pointA: {fileID: 642289750}
   pointB: {fileID: 2098978778}
   player: {fileID: 8523037103206665442, guid: 237020da760d9634ab2fa9e749d5c0e0, type: 3}
-  patrolSpeed: 5
-  chaseSpeed: 8
-  detectionRange: 7
+  patrolSpeed: 7
+  chaseSpeed: 10
+  detectionRange: 20
   stunDuration: 5
   crySound: {fileID: 8300000, guid: 92023c2486cf99245b77763789175d3c, type: 3}
   stepSound: {fileID: 8300000, guid: 2ca7108fd397c254881341584f4b059c, type: 3}
