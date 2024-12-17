@@ -8,4 +8,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Juan.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/HUDS/Menu.unity
+    guid: d50c8fb4eeb727d4a89e8bfb6a07d25c
+  - enabled: 1
+    path: Assets/Scenes/HUDS/Creditos.unity
+    guid: 9c526f9ac9e4cbd459f6b88e6d444f4d
+  - enabled: 1
+    path: Assets/Scenes/HUDS/HudGameplay.unity
+    guid: 85e8dfce59d4fdc4fb48f7de470175ba
+  - enabled: 1
+    path: Assets/Scenes/HUDS/Opcoes.unity
+    guid: 3281e0c25e08a9646a18e127bfaac836
+  - enabled: 1
+    path: Assets/Scenes/HUDS/Pause.unity
+    guid: 7fd74e2baa0b4974ca3bab0673e3ffb0
+  - enabled: 1
+    path: Assets/Scenes/HUDS/Pedido.unity
+    guid: 78663102450371149aa78708df89b7d5
+  - enabled: 1
+    path: Assets/Scenes/HUDS/Tutorial1.unity
+    guid: ed50092612ab59647876d85dffd82ae0
+  - enabled: 1
+    path: Assets/Scenes/HUDS/Tutorial2.unity
+    guid: aca2943d12502034d817d0da8f33ceff
+  - enabled: 1
+    path: Assets/Scenes/Caio.unity
+    guid: 7ee9abea9412d0f43a8d073d1105dac2
   m_configObjects: {}
