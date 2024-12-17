@@ -21,13 +21,16 @@ public class FallingTreeTop : MonoBehaviour
     }
 
     // Update is called once per frame
-    /* void Update()
+     void Update()
     {
         
-    }*/
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameO)
     }
+
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        if(rb == null)
+        {
+            break;
+        }
+    } */
 }
