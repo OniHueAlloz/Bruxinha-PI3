@@ -80,13 +80,14 @@ MonoBehaviour:
   pointA: {fileID: 0}
   pointB: {fileID: 0}
   player: {fileID: 0}
-  patrolSpeed: 5
-  chaseSpeed: 5
-  detectionRange: 10
+  patrolSpeed: 15
+  chaseSpeed: 18
+  detectionRange: 20
   stunDuration: 5
   crySound: {fileID: 0}
   stepSound: {fileID: 0}
   audioSource: {fileID: 748542863}
+  animator: {fileID: 0}
 --- !u!195 &748542862
 NavMeshAgent:
   m_ObjectHideFlags: 0

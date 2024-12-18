@@ -1547,7 +1547,7 @@ MonoBehaviour:
   glideFallSpeed: 1
   rayDistance: 5
   heightCorrection: 0.3
-  throwForce: 22
+  throwForce: 25
   holdPositionOffset: {x: 0, y: 2, z: 3}
   glideSound: {fileID: 8300000, guid: 3428a0884a3a83c47b1fbb65f86c301e, type: 3}
   damageSound: {fileID: 8300000, guid: 537ddc39af14f8a44bb11dbd8c5995f3, type: 3}
