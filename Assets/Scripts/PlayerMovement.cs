@@ -282,9 +282,12 @@ public class PlayerMovement : MonoBehaviour
             if (energy <= 0)
             {
                 life--;
-                if (life < 0)
+                energy = maxEnergy;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                if (life <= 0)
                 {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    life = 3;
+                    SceneManager.LoadScene("Menu");
                 }
             } 
         }
@@ -336,10 +339,11 @@ public class PlayerMovement : MonoBehaviour
         else if (other.gameObject.tag == "Death")
         {
             life--;
-            if (life < 0)
+            if (life <= 0)
             {
                 energy = maxEnergy;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                life = 3;
+                SceneManager.LoadScene("Menu");
             }
             else
             {
