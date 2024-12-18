@@ -338,6 +338,7 @@ public class PlayerMovement : MonoBehaviour
             life--;
             if (life < 0)
             {
+                energy = maxEnergy;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
             else
