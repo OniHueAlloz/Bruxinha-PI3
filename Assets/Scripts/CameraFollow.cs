@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [Header("Camera Settings")]
-    [SerializeField] private Vector3 offset = new Vector3(0, 5, -10);
+    [SerializeField] private Vector3 offset = new Vector3(0, 10, -10);
 
     private Transform playerTransform;
 

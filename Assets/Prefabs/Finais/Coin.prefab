@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 325
+  m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: -89.98, y: 180, z: 0}
 --- !u!33 &8536226565462065216
 MeshFilter:
@@ -105,7 +105,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.00050078874
+  m_Radius: 0.0008
   m_Center: {x: 0.000003501658, y: 3.4962593e-12, z: 0.0000007925556}
 --- !u!82 &5877817210768880776
 AudioSource:

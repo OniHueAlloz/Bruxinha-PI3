@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement Settings")]  
     [SerializeField] private float walkSpeed = 10f;
     [SerializeField] private float runSpeed = 20f;
+    [SerializeField] private float weight = 10f;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 5f;
@@ -149,6 +150,10 @@ public class PlayerMovement : MonoBehaviour
                 audioSource.PlayOneShot(glideSound);
                 Debug.Log("glideSound played"); 
             }
+        }
+        else //if (PlayerRb.velocity.y <= 0)
+        {
+            PlayerRb.velocity = new Vector3(PlayerRb.velocity.x, (PlayerRb.velocity.y - weight), PlayerRb.velocity.z);
         }
     }
 
