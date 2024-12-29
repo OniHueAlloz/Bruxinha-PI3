@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8546093924416206121}
   - component: {fileID: 8546093924416206120}
   - component: {fileID: 8546093924416206119}
-  - component: {fileID: 5755419070779369360}
+  - component: {fileID: 4142069769811063621}
   m_Layer: 0
   m_Name: FallingTreeTop
   m_TagString: Untagged
@@ -125,7 +125,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6237765474726674113, guid: f6e5fc4d7dea8e94c8dead9138d4d45d, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -225,8 +225,8 @@ MonoBehaviour:
   ground: {fileID: 0}
   fallSound: {fileID: 8300000, guid: d73023f584ba22544b7597c6d90ec94d, type: 3}
   rb: {fileID: 0}
---- !u!65 &5755419070779369360
-BoxCollider:
+--- !u!64 &4142069769811063621
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -243,6 +243,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.04893066, y: 0.043328714, z: 0.028357526}
-  m_Center: {x: -0.0015155788, y: 0.008308267, z: -0.0016542478}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9100271484765161120, guid: e059ab0a02234c542ac676fad5011c53, type: 3}

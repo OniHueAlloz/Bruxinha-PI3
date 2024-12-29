@@ -222,7 +222,7 @@ AnimatorStateMachine:
     m_Position: {x: 163.25879, y: -101.18631, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2348209396741948355}
-    m_Position: {x: -270, y: -10, z: 0}
+    m_Position: {x: -130, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6905022402283571715}
     m_Position: {x: 450, y: -170, z: 0}
@@ -235,7 +235,7 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -320, y: -160, z: 0}
+  m_AnyStatePosition: {x: -100, y: -170, z: 0}
   m_EntryPosition: {x: 50, y: -240, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -279,13 +279,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: StunTrigger
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
