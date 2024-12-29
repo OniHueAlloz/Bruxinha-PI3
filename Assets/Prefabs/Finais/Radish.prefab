@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7092300553715182246}
   - component: {fileID: 6179838448672761091}
   - component: {fileID: 8225759961022468553}
-  - component: {fileID: 8225759961022468548}
   - component: {fileID: 8225759961022468555}
   - component: {fileID: 8225759961022468554}
+  - component: {fileID: 594913860445399470}
   m_Layer: 0
   m_Name: Radish
   m_TagString: Radish
@@ -30,11 +30,11 @@ Transform:
   m_GameObject: {fileID: 7577088027429679132}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 3.83, y: -0.2, z: -6.73}
-  m_LocalScale: {x: 300, y: 300, z: 300}
+  m_LocalScale: {x: 1000, y: 1000, z: 1000}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &6179838448672761091
 MeshFilter:
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7577088027429679132}
-  m_Mesh: {fileID: 5778244993014119328, guid: 0e3b84b26ad35a24c9a84297f8885a1a, type: 3}
+  m_Mesh: {fileID: 1203874009397924758, guid: 5a5e0657048e1e24ea68ac8e3bfec917, type: 3}
 --- !u!23 &8225759961022468553
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e4d837919ef69d64d9f9bb65e9d7dfd7, type: 2}
+  - {fileID: -6478536213147159724, guid: 5a5e0657048e1e24ea68ac8e3bfec917, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,27 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8225759961022468548
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7577088027429679132}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.003000329
-  m_Center: {x: 0.000107842665, y: -0.00023751921, z: 0.0010493497}
 --- !u!82 &8225759961022468555
 AudioSource:
   m_ObjectHideFlags: 0
@@ -118,7 +97,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6237765474726674113, guid: f6e5fc4d7dea8e94c8dead9138d4d45d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 767f1345334c51c41b3d90950133beaf, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -127,7 +106,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 1.0562677
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -219,3 +198,24 @@ MonoBehaviour:
   floatDistance: 0.3
   floatSpeed: 2
   sound: {fileID: 8300000, guid: d9dfe2b8b67f8974e9a7044ed3ae5175, type: 3}
+--- !u!135 &594913860445399470
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577088027429679132}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.0010616536
+  m_Center: {x: -0.00006495488, y: -0.000012011528, z: 0.000044572116}

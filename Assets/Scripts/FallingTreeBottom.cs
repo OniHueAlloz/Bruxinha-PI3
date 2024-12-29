@@ -38,7 +38,7 @@ public class FallingTreeBottom : MonoBehaviour
 
     private void OnCollisionEnter (Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Thrown"))
         {
             audioSource.PlayOneShot(breakSound);
             treeRb.constraints = RigidbodyConstraints.None;

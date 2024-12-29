@@ -180,6 +180,25 @@ public class Huds : MonoBehaviour
     public void LoadScenes(string cena) {
         SceneManager.LoadScene(cena);
     }
+    public void EndGame()
+    {
+        //associar aos botões de sair dos creditos e do pause
+        PlayerMovement.gotObjective = false;
+        PlayerMovement.gotPlush = false;
+        PlayerMovement.coinCount = 0;
+        PlayerMovement.life = 3; 
+        PlayerMovement.energy = 5;
+
+        i = 0;
+        
+        Dialogo1.SetActive(false);
+        Dialogo2.SetActive(false);
+        Dialogo3.SetActive(false);
+        pedido.SetActive(false);
+        pause.SetActive(false);
+
+        SceneManager.LoadScene("Menu");
+    }
 
     public void Quitexe(){
         Application.Quit();

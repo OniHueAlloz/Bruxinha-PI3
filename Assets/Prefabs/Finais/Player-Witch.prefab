@@ -1497,7 +1497,7 @@ Transform:
   m_Children:
   - {fileID: 9206246577666158339}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8523037103206665443
 Rigidbody:
@@ -1507,7 +1507,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8523037103206665447}
   serializedVersion: 4
-  m_Mass: 2
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1525,7 +1525,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &8523037103206665440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1540,13 +1540,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 20
   runSpeed: 30
+  weight: 10
   jumpForce: 15
   isGrounded: 0
   groundCheckRadius: 0.3
   groundCheckDistance: 0.5
   glideFallSpeed: 1
   rayDistance: 5
-  heightCorrection: 0.3
+  heightCorrection: 0.5
   throwForce: 25
   holdPositionOffset: {x: 0, y: 2, z: 3}
   glideSound: {fileID: 8300000, guid: 3428a0884a3a83c47b1fbb65f86c301e, type: 3}
@@ -1574,8 +1575,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2491913, y: 2.6115546, z: 1.067359}
-  m_Center: {x: -0.02973175, y: 0.6555948, z: 0.033679485}
+  m_Size: {x: 1.2491913, y: 3.853009, z: 1.067359}
+  m_Center: {x: -0.02973175, y: 1.276322, z: 0.033679485}
 --- !u!82 &8523037103206665446
 AudioSource:
   m_ObjectHideFlags: 0

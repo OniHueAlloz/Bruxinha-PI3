@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip floatSound;
     private AudioSource audioSource;
+    private bool isLong = false;
 
     // Start is called before the first frame update
     void Start()
@@ -81,6 +82,11 @@ public class PlayerMovement : MonoBehaviour
         MovementCommands();
         JumpCommands();
         if (Input.GetKeyDown(KeyCode.E)) DetectLiftableObject();
+        if (isLong && isGrounded)
+        {
+            audioSource.Stop();
+            isLong = false;
+        } 
     }
 
     private void MovementCommands()
@@ -148,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
                 //pula se estiver fora do chão (o if ali em cima garante que a redução de velocidade do glide só afeta a descida e não a subida)
                 PlayerRb.velocity = new Vector3(PlayerRb.velocity.x, -glideFallSpeed, PlayerRb.velocity.z);
                 audioSource.PlayOneShot(glideSound);
+                isLong = true;
                 Debug.Log("glideSound played"); 
             }
         }

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4698952814892464782}
   - component: {fileID: 8546093924416206123}
   - component: {fileID: 5871889538923839969}
-  - component: {fileID: 8546093924416206118}
   - component: {fileID: 8546093924416206121}
   - component: {fileID: 8546093924416206120}
   - component: {fileID: 8546093924416206119}
+  - component: {fileID: 5755419070779369360}
   m_Layer: 0
   m_Name: FallingTreeTop
   m_TagString: Untagged
@@ -29,9 +29,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5367683949848748084}
-  m_LocalRotation: {x: -0.70589656, y: -0.041353527, z: 0.041353524, w: 0.70589656}
+  m_LocalRotation: {x: -0.7058967, y: -0.041350808, z: 0.041350808, w: 0.7058967}
   m_LocalPosition: {x: 32.728, y: 10.83392, z: -3.5656805}
-  m_LocalScale: {x: 80, y: 80, z: 400}
+  m_LocalScale: {x: 400, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5367683949848748084}
-  m_Mesh: {fileID: 2534964839176971238, guid: fc22bf465ea5b244e9ee80aa1f50407f, type: 3}
+  m_Mesh: {fileID: 9100271484765161120, guid: e059ab0a02234c542ac676fad5011c53, type: 3}
 --- !u!23 &5871889538923839969
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7f411dbcca364364095176fb48f11879, type: 2}
+  - {fileID: -876546973899608171, guid: e059ab0a02234c542ac676fad5011c53, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,27 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8546093924416206118
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5367683949848748084}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.023029067, y: 0.023588812, z: 0.020685667}
-  m_Center: {x: 0.0004337263, y: 0.0012283816, z: -0.0004005372}
 --- !u!54 &8546093924416206121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -246,3 +225,24 @@ MonoBehaviour:
   ground: {fileID: 0}
   fallSound: {fileID: 8300000, guid: d73023f584ba22544b7597c6d90ec94d, type: 3}
   rb: {fileID: 0}
+--- !u!65 &5755419070779369360
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367683949848748084}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.04893066, y: 0.043328714, z: 0.028357526}
+  m_Center: {x: -0.0015155788, y: 0.008308267, z: -0.0016542478}

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 184611289723115106}
   - component: {fileID: 2696294657186980520}
   - component: {fileID: 4497923693699548030}
-  - component: {fileID: 4497923693699548028}
   - component: {fileID: 4497923693699548017}
+  - component: {fileID: 8143444684528105237}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Objective
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4497923693699548029}
-  m_Mesh: {fileID: 1324408978694381019, guid: 16d81c9e13f12bb41a688612348e40bb, type: 3}
+  m_Mesh: {fileID: 1324408978694381019, guid: 24f918ad2e64eaf4d99779886d0e8285, type: 3}
 --- !u!23 &2696294657186980520
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fd3a7bc3c0f668d4aa83704f328bb338, type: 2}
+  - {fileID: -6478536213147159724, guid: 24f918ad2e64eaf4d99779886d0e8285, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -182,28 +182,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!64 &4497923693699548028
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4497923693699548029}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1324408978694381019, guid: 16d81c9e13f12bb41a688612348e40bb, type: 3}
 --- !u!114 &4497923693699548017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,3 +198,24 @@ MonoBehaviour:
   floatDistance: 0.3
   floatSpeed: 2
   sound: {fileID: 8300000, guid: d9dfe2b8b67f8974e9a7044ed3ae5175, type: 3}
+--- !u!135 &8143444684528105237
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4497923693699548029}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.00078718923
+  m_Center: {x: -0.0000005426991, y: 0.00015448661, z: 0.000075083575}
