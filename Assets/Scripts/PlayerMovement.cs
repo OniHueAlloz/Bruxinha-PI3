@@ -158,10 +158,10 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("glideSound played"); 
             }
         }
-        else //if (PlayerRb.velocity.y <= 0)
+        /* else //if (PlayerRb.velocity.y <= 0)
         {
             PlayerRb.velocity = new Vector3(PlayerRb.velocity.x, (PlayerRb.velocity.y - weight), PlayerRb.velocity.z);
-        }
+        }*/
     }
 
     private void DetectLiftableObject()

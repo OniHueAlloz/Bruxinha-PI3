@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour
             rb.constraints = (RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY);
             enemy.isStopped = false;
 
-            animator.SetBool("StunTrigger", false);
+            animator.SetTrigger("EndStun");
         }
     }
 
@@ -143,7 +143,7 @@ public class Enemy : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezeAll;
         enemy.ResetPath();
 
-        animator.SetBool("StunTrigger", true);
+        animator.SetTrigger("Stun");
         PlayCrySound();
     }
 
