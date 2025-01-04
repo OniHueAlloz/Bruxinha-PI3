@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public static int energy = 5;
     [SerializeField] public static int life = 3;
     private Rigidbody PlayerRb;
+    private Animator animator;
 
     [Header("Movement Settings")]  
     [SerializeField] private float walkSpeed = 10f;
@@ -61,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
         PlayerRb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
 
+        animator = GetComponentInChildren<Animator>();
+
         //Criando um objeto vazio e colocando ele numa posição relativa ao player com offset, para usar como referência depois
         holdPosition = new GameObject("HoldPosition");
         holdPosition.transform.SetParent(transform);
@@ -97,13 +100,49 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 movement = new Vector3(moveX, 0, moveZ).normalized;
 
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            animator.SetTrigger("Run");
+        }
+        else if (Input.GetKeyDown(KeyCode.A))
+        {
+            animator.SetTrigger("Left");
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+            animator.SetTrigger("Right");
+        }
+        else if (moveX > 0)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                animator.SetTrigger("Left");
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                animator.SetTrigger("Right");
+            }
+        }
+        else if (moveX < 0)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                animator.SetTrigger("Right");
+            }
+            else if (Input.GetKeyDown(KeyCode.S))
+            {
+                animator.SetTrigger("Left");
+            }
+        }
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             //corre se apertar shift
+            
             PlayerRb.MovePosition(transform.position + movement * runSpeed * Time.deltaTime);
 
             //roda
-            if (movement.magnitude > 0)
+             if (movement.magnitude > 0)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(movement);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, runSpeed * Time.deltaTime);
@@ -117,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
 
 
             //roda
-            if (movement.magnitude > 0)
+             if (movement.magnitude > 0)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(movement);
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, walkSpeed * Time.deltaTime);

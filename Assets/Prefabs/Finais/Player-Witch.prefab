@@ -214,7 +214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628737970626840095}
   m_LocalRotation: {x: -0.7071068, y: 2.5121483e-15, z: 2.5121487e-15, w: 0.7071067}
-  m_LocalPosition: {x: 2.8664985e-11, y: 1.422006, z: -0.008077381}
+  m_LocalPosition: {x: 2.8664985e-11, y: 12.2, z: -0.008077381}
   m_LocalScale: {x: 99.999985, y: 99.999985, z: 99.999985}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1497,7 +1497,7 @@ Transform:
   m_Children:
   - {fileID: 9206246577666158339}
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &8523037103206665443
 Rigidbody:
@@ -1507,7 +1507,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8523037103206665447}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1524,7 +1524,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!114 &8523037103206665440
 MonoBehaviour:
@@ -1538,10 +1538,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12900afa0843e2b48a8eaa0c16343760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 10
-  runSpeed: 30
-  weight: 10
-  jumpForce: 7
+  walkSpeed: 5
+  runSpeed: 10
+  weight: 8
+  jumpForce: 100
   isGrounded: 0
   groundCheckRadius: 0.3
   groundCheckDistance: 0.5
@@ -1575,8 +1575,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2491913, y: 3.853009, z: 1.067359}
-  m_Center: {x: -0.02973175, y: 1.276322, z: 0.033679485}
+  m_Size: {x: 1.2491913, y: 2.6115546, z: 1.067359}
+  m_Center: {x: -0.02973175, y: 0.6555948, z: 0.033679485}
 --- !u!82 &8523037103206665446
 AudioSource:
   m_ObjectHideFlags: 0
