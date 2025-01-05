@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -569,6 +569,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ecdab087d7bcb48886cbbd8af01be3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pedido: {fileID: 0}
+  coinText: {fileID: 0}
+  objectiveText: {fileID: 0}
+  plushText: {fileID: 0}
+  Dialogo1: {fileID: 0}
+  Dialogo2: {fileID: 0}
+  Dialogo3: {fileID: 0}
+  coinUI: {fileID: 0}
+  lifeUi: {fileID: 0}
+  energy1: {fileID: 0}
+  energy2: {fileID: 0}
+  energy3: {fileID: 0}
+  energy4: {fileID: 0}
+  energy5: {fileID: 0}
+  cat: {fileID: 0}
+  hide: {fileID: 0}
+  pause: {fileID: 0}
 --- !u!1 &1992794018
 GameObject:
   m_ObjectHideFlags: 0

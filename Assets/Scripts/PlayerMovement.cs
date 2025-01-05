@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float walkSpeed = 10f;
     [SerializeField] private float runSpeed = 20f;
     [SerializeField] private float weight = 10f;
+    [SerializeField] private float wallRayDistance = 5f;
 
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 5f;
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckRadius = 0.5f;
     [SerializeField] private float groundCheckDistance = 0.6f;
     [SerializeField] private float glideFallSpeed = 1f;
+    private bool nearWall = false;
 
     [Header("Interaction Settings")]
     [SerializeField] private float rayDistance = 5f;
@@ -84,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Chamando os métodos de comandos
         isGrounded = CheckIfGrounded();
+        nearWall = IsCloseToWall();
         MovementCommands();
         JumpCommands();
         if (Input.GetKeyDown(KeyCode.E)) DetectLiftableObject();
@@ -91,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
         {
             audioSource.Stop();
             isLong = false;
-        } 
+        }
     }
 
     private void MovementCommands()
@@ -101,6 +104,21 @@ public class PlayerMovement : MonoBehaviour
         float moveZ = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveX, 0, moveZ).normalized;
+
+        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
+
+        if (nearWall && (currentSpeed == runSpeed))
+        {
+            currentSpeed *= 0.5f;
+        }
+
+        PlayerRb.MovePosition(transform.position + movement * currentSpeed * Time.deltaTime);
+
+        if (movement.magnitude > 0)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, currentSpeed * Time.deltaTime);
+        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -152,34 +170,6 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetTrigger("Left");
             }
         }
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            //corre se apertar shift
-            
-            PlayerRb.MovePosition(transform.position + movement * runSpeed * Time.deltaTime);
-
-            //roda
-             if (movement.magnitude > 0)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(movement);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, runSpeed * Time.deltaTime);
-            }
-            
-        }
-        else 
-        {
-            //se não apertar shift anda
-            PlayerRb.MovePosition(transform.position + movement * walkSpeed * Time.deltaTime);
-
-
-            //roda
-             if (movement.magnitude > 0)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(movement);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, walkSpeed * Time.deltaTime);
-            }
-        }
     }
 
     private bool CheckIfGrounded()
@@ -193,6 +183,19 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + Vector3.down * groundCheckDistance, groundCheckRadius);
+
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.5f;
+        Vector3 rayDirection = transform.forward;
+
+        bool hitWall = Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hit, wallRayDistance) && hit.collider.CompareTag("Wall");
+
+        Gizmos.color = hitWall ? Color.red : Color.black;
+        Gizmos.DrawRay(rayOrigin, rayDirection * wallRayDistance);
+
+        if (hitWall)
+        {
+            Gizmos.DrawSphere(hit.point, 0.2f);
+        }
     }
 
     private void JumpCommands()
@@ -338,6 +341,26 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool IsCloseToWall()
+    {
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.5f; 
+        Vector3 rayDirection = transform.forward;
+
+        Debug.DrawRay(rayOrigin, rayDirection * rayDistance, Color.red, 0.5f);
+
+        if (Physics.Raycast(rayOrigin, rayDirection, out RaycastHit hit, rayDistance))
+        {
+            if (hit.collider.CompareTag("Wall"))
+            {
+                Debug.DrawRay(rayOrigin, rayDirection * rayDistance, Color.red, 0.5f);
+                Debug.Log("Close to a wall!");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         // verifica que o jogador tocou o chão
@@ -358,7 +381,12 @@ public class PlayerMovement : MonoBehaviour
                     life = 3;
                     SceneManager.LoadScene("Menu");
                 }
-            } 
+            }
+
+            if (!Input.GetButtonDown("Jump") && PlayerRb.velocity.y > 0)
+            {
+                PlayerRb.velocity = new Vector3(PlayerRb.velocity.x, -(2*glideFallSpeed), PlayerRb.velocity.z);
+            }
         }
     }
 

@@ -17,6 +17,7 @@ TagManager:
   - Radish
   - Death
   - Check
+  - Wall
   layers:
   - Default
   - TransparentFX

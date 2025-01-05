@@ -52,6 +52,7 @@ public class Huds : MonoBehaviour
         if (PlayerMovement.gotObjective)
         {
             pedido.gameObject.SetActive(true);
+            PlayerMovement.PlayerRb.constraints = RigidbodyConstraints.FreezeAll;
             //Time.timeScale = 0f;
         }
 
@@ -187,7 +188,7 @@ public class Huds : MonoBehaviour
     public void LoadScenes(string cena) {
         SceneManager.LoadScene(cena);
     }
-    public void EndGame()
+    public void EndGame(string cena)
     {
         //associar aos botões de sair dos creditos e do pause
         PlayerMovement.gotObjective = false;
@@ -206,7 +207,7 @@ public class Huds : MonoBehaviour
 
         PlayerMovement.initialPosition = PlayerMovement.awakePosition;
 
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(cena);
     }
 
     public void Quitexe(){
