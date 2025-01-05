@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     //Informações de Interface
     [SerializeField] public static int energy = 5;
     [SerializeField] public static int life = 3;
-    private Rigidbody PlayerRb;
+    public static Rigidbody PlayerRb;
     private Animator animator;
 
     [Header("Movement Settings")]  
@@ -38,7 +38,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isHolding = false;
     private bool isThrowable = false;
     private bool isLiftable = false;
-    private Vector3 initialPosition;
+    public static Vector3 awakePosition;
+    public static Vector3 initialPosition;
 
     //Pedido Concluído:
     public static int coinCount = 0;
@@ -61,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         //Associando o Rigidbody
         PlayerRb = GetComponent<Rigidbody>();
         initialPosition = transform.position;
+        awakePosition = transform.position;
 
         animator = GetComponentInChildren<Animator>();
 
@@ -104,15 +106,31 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetTrigger("Run");
         }
-        else if (Input.GetKeyDown(KeyCode.A))
+
+        if (moveZ > 0)
         {
-            animator.SetTrigger("Left");
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                animator.SetTrigger("Left");
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                animator.SetTrigger("Right");
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+        else if (moveZ < 0)
         {
-            animator.SetTrigger("Right");
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                animator.SetTrigger("Right");
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                animator.SetTrigger("Left");
+            }
         }
-        else if (moveX > 0)
+
+        if (moveX > 0)
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -401,6 +419,11 @@ public class PlayerMovement : MonoBehaviour
                 transform.position = initialPosition;
                 PlayerRb.velocity = Vector3.zero;
             }
+        }
+        else if (other.gameObject.tag == "Check")
+        {
+            initialPosition = transform.position;
+            Debug.Log("Checkpoint Salvo");
         }
     }
 

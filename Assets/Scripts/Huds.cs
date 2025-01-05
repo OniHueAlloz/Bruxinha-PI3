@@ -56,6 +56,10 @@ public class Huds : MonoBehaviour
         }
 
         UpdateTexts();
+        if (i == 0)
+        {
+            PlayerMovement.PlayerRb.constraints = RigidbodyConstraints.FreezeAll;
+        }
 
         if(Input.GetKeyDown(KeyCode.Return))
         {
@@ -78,6 +82,7 @@ public class Huds : MonoBehaviour
                 Dialogo1.gameObject.SetActive(false);
                 Dialogo2.gameObject.SetActive(false);
                 Dialogo3.gameObject.SetActive(false);
+                PlayerMovement.PlayerRb.constraints = RigidbodyConstraints.FreezeRotation;
                 //Time.timeScale = 1f;
             }
         }
@@ -85,6 +90,7 @@ public class Huds : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             pause.gameObject.SetActive(true);
+            PlayerMovement.PlayerRb.constraints = RigidbodyConstraints.FreezeAll;
         }
 
         int varEnergy = PlayerMovement.energy;
@@ -144,6 +150,7 @@ public class Huds : MonoBehaviour
     public void EscapeButton()
     {
         pause.gameObject.SetActive(false);
+        PlayerMovement.PlayerRb.constraints = RigidbodyConstraints.FreezeRotation;
     }
     
 
@@ -196,6 +203,8 @@ public class Huds : MonoBehaviour
         Dialogo3.SetActive(false);
         pedido.SetActive(false);
         pause.SetActive(false);
+
+        PlayerMovement.initialPosition = PlayerMovement.awakePosition;
 
         SceneManager.LoadScene("Menu");
     }
