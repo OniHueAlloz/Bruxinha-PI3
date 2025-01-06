@@ -13,19 +13,31 @@ public class MusicManager : MonoBehaviour
     public AudioClip gameplay;
     private string currentSceneName;
     private string previousSceneName;
+    private static MusicManager instance;
 
     // Start is called before the first frame update
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = menu;
-        audioSource.playOnAwake = true;
+        audioSource.playOnAwake = false;
         audioSource.loop = true;
-        audioSource.Play();
 
         previousSceneName = SceneManager.GetActiveScene().name;
+    }
 
-        DontDestroyOnLoad(gameObject);
+    void Start()
+    {
+        Debug.Log("Number of MusicManager instances: " + FindObjectsOfType<MusicManager>().Length);
+        MusicPlay(SceneManager.GetActiveScene().name);
     }
 
     // Update is called once per frame
